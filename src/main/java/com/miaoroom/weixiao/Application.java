@@ -1,4 +1,4 @@
-package com.company.project;
+package com.miaoroom.weixiao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

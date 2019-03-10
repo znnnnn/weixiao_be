@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miaoroom.weixiao.dao.UsermetaMapper">
+  <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Usermeta">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="umeta_ID" jdbcType="BIGINT" property="umetaId" />
+    <result column="user_ID" jdbcType="BIGINT" property="userId" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="truename" jdbcType="VARCHAR" property="truename" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="Admission" jdbcType="TIMESTAMP" property="admission" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="user_tag" jdbcType="VARCHAR" property="userTag" />
+    <result column="user_introduce" jdbcType="VARCHAR" property="userIntroduce" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="avatar" jdbcType="LONGVARCHAR" property="avatar" />
+  </resultMap>
+</mapper>

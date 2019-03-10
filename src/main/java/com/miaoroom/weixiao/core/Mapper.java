@@ -1,4 +1,4 @@
-package com.company.project.core;
+package com.miaoroom.weixiao.core;
 
 import tk.mybatis.mapper.common.BaseMapper;
 import tk.mybatis.mapper.common.ConditionMapper;
