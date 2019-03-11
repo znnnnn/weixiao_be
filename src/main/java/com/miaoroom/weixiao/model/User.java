@@ -1,38 +1,46 @@
 package com.miaoroom.weixiao.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Users {
+@ApiModel(value="User")
+public class User {
     /**
      * 主键
      */
     @Id
     @Column(name = "user_ID")
+    @ApiModelProperty(value="主键")
     private Long userId;
 
     /**
      * 用户名
      */
     @Column(name = "user_login")
+    @ApiModelProperty(value="用户名")
     private String userLogin;
 
     /**
      * 密码
      */
     @Column(name = "user_pass")
+    @ApiModelProperty(value="密码")
     private String userPass;
 
     /**
      * 注册时间
      */
     @Column(name = "user_registered")
+    @ApiModelProperty(value="注册时间")
     private Date userRegistered;
 
     /**
      * 用户状态 0 待激活 1 激活 2 封禁
      */
     @Column(name = "user_status")
+    @ApiModelProperty(value="用户状态 0 待激活 1 激活 2 封禁")
     private Integer userStatus;
 
     /**

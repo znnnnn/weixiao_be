@@ -1,8 +1,8 @@
 package com.miaoroom.weixiao.service.impl;
 
-import com.miaoroom.weixiao.dao.UsersMapper;
-import com.miaoroom.weixiao.model.Users;
-import com.miaoroom.weixiao.service.UsersService;
+import com.miaoroom.weixiao.dao.UserMapper;
+import com.miaoroom.weixiao.model.User;
+import com.miaoroom.weixiao.service.UserService;
 import com.miaoroom.weixiao.core.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +15,8 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional
-public class UsersServiceImpl extends AbstractService<Users> implements UsersService {
+public class UserServiceImpl extends AbstractService<User> implements UserService {
     @Resource
-    private UsersMapper usersMapper;
+    private UserMapper userMapper;
 
 }
