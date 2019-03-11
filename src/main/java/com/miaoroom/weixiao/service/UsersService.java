@@ -4,7 +4,7 @@ import com.miaoroom.weixiao.core.Service;
 
 
 /**
- * Created by CodeGenerator on 2019/03/10.
+ * Created by CodeGenerator on 2019/03/11.
  */
 public interface UsersService extends Service<Users> {
 

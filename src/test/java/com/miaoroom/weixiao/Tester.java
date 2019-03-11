@@ -1,4 +1,4 @@
-package com.conpany.project;
+package com.miaoroom.weixiao;
 
 
 import com.miaoroom.weixiao.Application;
@@ -15,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest(classes = Application.class)
 @Transactional
 @Rollback
-public abstract class Tester {}
+public abstract class Tester {
+}
 
 
 
