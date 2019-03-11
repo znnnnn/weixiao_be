@@ -6,6 +6,7 @@ import com.miaoroom.weixiao.model.Users;
 import com.miaoroom.weixiao.service.UsersService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -44,6 +45,7 @@ public class UsersController {
         return ResultGenerator.genSuccessResult(users);
     }
 
+    @ApiOperation(value="所有用户", notes="查询所有用户")
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
