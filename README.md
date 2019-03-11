@@ -9,4 +9,7 @@
 
 ### 项目中参考文献
 
-* [Spring Boot中使用Swagger2构建强大的RESTful API文档](http://blog.didispace.com/springbootswagger2/)
+* Swagger2
+    * [Spring Boot中使用Swagger2构建强大的RESTful API文档](http://blog.didispace.com/springbootswagger2/)
+    * [一个已整合完毕的项目](https://github.com/Gahon1995/spring-boot-api-project-seed)
+    * [整合时遇到的问题](https://github.com/lihengming/spring-boot-api-project-seed/issues/58)
