@@ -24,8 +24,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     public boolean isRepeated(String userLogin) {
         if (null == userMapper.findByUserLogin(userLogin)) {
             return true;
-        }
-         else {
+        } else {
             return false;
         }
     }

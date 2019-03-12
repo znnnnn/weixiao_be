@@ -11,6 +11,8 @@
     <result column="user_registered" jdbcType="TIMESTAMP" property="userRegistered" />
     <result column="user_status" jdbcType="INTEGER" property="userStatus" />
     <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_role" jdbcType="VARCHAR" property="userRole" />
+    <result column="user_permission" jdbcType="VARCHAR" property="userPermission" />
   </resultMap>
 
   <!--<select id="findByUserLogin" parameterType="String" resultMap="BaseResultMap">-->

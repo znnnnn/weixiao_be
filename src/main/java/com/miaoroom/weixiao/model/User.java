@@ -2,53 +2,68 @@ package com.miaoroom.weixiao.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 import javax.persistence.*;
 
-@ApiModel(value="User")
+@ApiModel(value = "User")
 public class User {
     /**
      * 主键
      */
     @Id
     @Column(name = "user_ID")
-    @ApiModelProperty(value="主键")
+    @ApiModelProperty(value = "主键")
     private Long userId;
 
     /**
      * 用户名
      */
     @Column(name = "user_login")
-    @ApiModelProperty(value="用户名")
+    @ApiModelProperty(value = "用户名")
     private String userLogin;
 
     /**
      * 密码
      */
     @Column(name = "user_pass")
-    @ApiModelProperty(value="密码")
+    @ApiModelProperty(value = "密码")
     private String userPass;
 
     /**
      * 注册时间
      */
     @Column(name = "user_registered")
-    @ApiModelProperty(value="注册时间")
+    @ApiModelProperty(value = "注册时间")
     private Date userRegistered;
 
     /**
      * 用户状态 0 待激活 1 激活 2 封禁
      */
     @Column(name = "user_status")
-    @ApiModelProperty(value="用户状态 0 待激活 1 激活 2 封禁")
+    @ApiModelProperty(value = "用户状态 0 待激活 1 激活 2 封禁")
     private Integer userStatus;
 
     /**
      * 手机
      */
     @Column(name = "user_phone")
-    @ApiModelProperty(value="手机")
+    @ApiModelProperty(value = "手机")
     private String userPhone;
+
+    /**
+     * 用户角色
+     */
+    @Column(name = "user_role")
+    @ApiModelProperty(value = "用户权限")
+    private String userRole;
+
+    /**
+     * 用户权限
+     */
+    @Column(name = "user_permission")
+    @ApiModelProperty(value = "用户权限")
+    private String userPermission;
 
     /**
      * 获取主键
@@ -156,5 +171,41 @@ public class User {
      */
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
+    }
+
+    /**
+     * 获取用户角色
+     *
+     * @return user_role 用户角色
+     */
+    public String getUserRole() {
+        return userRole;
+    }
+
+    /**
+     * 设置用户角色
+     *
+     * @param userRole 用户角色
+     */
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    /**
+     * 获取用户权限
+     *
+     * @return user_permission 用户权限
+     */
+    public String getUserPermission() {
+        return userPermission;
+    }
+
+    /**
+     * 设置用户权限
+     *
+     * @param userPermission 用户权限
+     */
+    public void setUserPermission(String userPermission) {
+        this.userPermission = userPermission;
     }
 }
