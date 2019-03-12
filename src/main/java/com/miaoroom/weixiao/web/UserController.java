@@ -22,7 +22,11 @@ public class UserController {
 
     @PostMapping
     public Result add(@RequestBody User user) {
-        userService.save(user);
+        if (userService.isRepeated(user.getUserLogin())) {
+            userService.save(user);
+        } else {
+            return ResultGenerator.genFailResult("用户名重复！");
+        }
         return ResultGenerator.genSuccessResult();
     }
 
