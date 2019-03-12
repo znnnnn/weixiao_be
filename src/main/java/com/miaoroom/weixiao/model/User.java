@@ -44,6 +44,13 @@ public class User {
     private Integer userStatus;
 
     /**
+     * 手机
+     */
+    @Column(name = "user_phone")
+    @ApiModelProperty(value="手机")
+    private String userPhone;
+
+    /**
      * 获取主键
      *
      * @return user_ID - 主键
@@ -131,5 +138,23 @@ public class User {
      */
     public void setUserStatus(Integer userStatus) {
         this.userStatus = userStatus;
+    }
+
+    /**
+     * 获取手机
+     *
+     * @return user_phone - 手机
+     */
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    /**
+     * 设置手机
+     *
+     * @param userPhone 手机
+     */
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 }

@@ -6,15 +6,13 @@ import com.miaoroom.weixiao.model.User;
 import com.miaoroom.weixiao.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2019/03/11.
+* Created by CodeGenerator on 2019/03/12.
 */
 @RestController
 @RequestMapping("/user")
@@ -23,9 +21,6 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    @ApiOperation(value="创建用户", notes="根据User对象创建用户")
-    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
-    @RequestMapping(value="", method=RequestMethod.POST)
     public Result add(@RequestBody User user) {
         userService.save(user);
         return ResultGenerator.genSuccessResult();

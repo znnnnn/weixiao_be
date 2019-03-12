@@ -18,7 +18,7 @@ import static com.miaoroom.weixiao.core.ProjectConstant.*;
  */
 public class CodeGenerator {
     //JDBC配置，请修改为你项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://111.231.116.130:3306/weixiao";
+    private static final String JDBC_URL = "jdbc:mysql://111.231.116.130:3306/weixiao?characterEncoding=utf8&useSSL=false";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "123456";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";

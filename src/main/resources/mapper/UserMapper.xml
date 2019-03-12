@@ -10,5 +10,13 @@
     <result column="user_pass" jdbcType="VARCHAR" property="userPass" />
     <result column="user_registered" jdbcType="TIMESTAMP" property="userRegistered" />
     <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
   </resultMap>
+
+  <!--<select id="findByUserLogin" parameterType="String" resultMap="BaseResultMap">-->
+    <!--SELECT * FROM user-->
+  <!--</select>-->
+  <select id="findByUserLogin" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM user where user_login = #{user_login}
+  </select>
 </mapper>
