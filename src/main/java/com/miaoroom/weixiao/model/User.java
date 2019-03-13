@@ -20,15 +20,22 @@ public class User {
      * 用户名
      */
     @Column(name = "user_login")
-    @ApiModelProperty(value = "用户名")
+    @ApiModelProperty(value = "用户名", required = true)
     private String userLogin;
 
     /**
      * 密码
      */
     @Column(name = "user_pass")
-    @ApiModelProperty(value = "密码")
+    @ApiModelProperty(value = "密码", required = true)
     private String userPass;
+
+    /**
+     * 密码
+     */
+    @Column(name = "user_salt")
+    @ApiModelProperty(value = "用户密码盐")
+    private String userSalt;
 
     /**
      * 注册时间
@@ -117,6 +124,24 @@ public class User {
      */
     public void setUserPass(String userPass) {
         this.userPass = userPass;
+    }
+
+    /**
+     * 获取密码
+     *
+     * @return user_salt - 用户密码盐
+     */
+    public String getUserSalt() {
+        return userSalt;
+    }
+
+    /**
+     * 设置密码
+     *
+     * @param userSalt 用户密码盐
+     */
+    public void setUserSalt(String userSalt) {
+        this.userSalt = userSalt;
     }
 
     /**

@@ -10,5 +10,6 @@ import java.util.List;
 public interface UserMapper extends Mapper<User> {
 
     User findByUserLogin(String UserLogin);
+
     List<User> findByUserLogin();
 }

@@ -8,4 +8,6 @@ import com.miaoroom.weixiao.core.Service;
  */
 public interface UserService extends Service<User> {
     boolean isRepeated(String userLogin);
+
+    String login(User user);
 }
