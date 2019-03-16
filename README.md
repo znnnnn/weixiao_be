@@ -1,15 +1,16 @@
 ## 简介
 微校后端服务项目，项目基于 `Spring Boot API Project Seed`种子项目进行开发，感谢开源为我们带来如此方便的 `Seed`.
 
-### 项目第三方工具管理页面
-* [Swagger2 API 页面](http://localhost:8080/doc.html)
-* [druid监控页面](http://localhost:8080/druid/datasource.html)
-
 ### Spring Boot API Project Seed 简介
 
 项目原地址：https://github.com/lihengming/spring-boot-api-project-seed
 
 是一个基于Spring Boot & MyBatis的种子项目，用于快速构建中小型API、RESTful API项目，该种子项目已经有过多个真实项目的实践，稳定、简单、快速，使我们摆脱那些重复劳动，专注于业务代码的编写，减少加班。下面是一个简单的使用演示，看如何基于本项目在短短几十秒钟内实现一套简单的API，并运行提供服务。
+
+### 项目第三方工具管理页面
+* [Swagger2 API 页面](http://localhost:8080/doc.html)
+* [druid监控页面](http://localhost:8080/druid/datasource.html)
+
 
 ## 技术选型&文档
 - Spring Boot（[查看Spring Boot学习&使用指南](http://www.jianshu.com/p/1a9fd8936bd8)）
@@ -22,6 +23,9 @@
     - [Spring Boot中使用Swagger2构建强大的RESTful API文档](http://blog.didispace.com/springbootswagger2/)
     - [一个已整合完毕的项目](https://github.com/Gahon1995/spring-boot-api-project-seed)
     - [整合时遇到的问题](https://github.com/lihengming/spring-boot-api-project-seed/issues/58)
+- 阿里云短信配置
+    - [OpenAPI Explorer](https://api.aliyun.com/?spm=a2c4g.11186623.2.14.31a350a4SXcOam#/?product=Dysmsapi&api=SendSms)
+    - [基于阿里大于的短信验证微服务 | 记路心晴](https://songwell1024.github.io/2019/01/06/CheckSmsCode/)
     
 ## 开发建议
 - [RESTful API 接口实践 - 阮一峰](http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html)

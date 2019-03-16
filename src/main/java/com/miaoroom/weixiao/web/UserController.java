@@ -1,12 +1,15 @@
 package com.miaoroom.weixiao.web;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.miaoroom.weixiao.core.Result;
 import com.miaoroom.weixiao.core.ResultGenerator;
+import com.miaoroom.weixiao.enums.ValidateCodeEnum;
 import com.miaoroom.weixiao.model.User;
 import com.miaoroom.weixiao.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.miaoroom.weixiao.shiro.ShiroKit;
+import com.miaoroom.weixiao.vo.CodeInfo;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +29,12 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @PostMapping("/login")
-    @ApiOperation(value="登录", notes="根据用户名密码进行登录")
-    @
+
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "user.userLogin", value = "用户名", required = true, dataType = "String", paramType = "body"),
 //            @ApiImplicitParam(name = "user.userPass", value = "密码", required = true, dataType = "String", paramType = "body")})
+    @PostMapping("/login")
+    @ApiOperation(value="登录", notes="根据用户名密码进行登录")
     @ApiImplicitParam(name="user", value = "用户实体", required = true, dataType = "User")
     public Result login(@RequestBody User user) {
         log.info("用户请求登录，获取Token");
@@ -43,6 +46,7 @@ public class UserController {
         } else {
             return ResultGenerator.genFailResult("用户名密码错误");
         }
+
     }
 
     @PostMapping
@@ -84,4 +88,20 @@ public class UserController {
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
+
+    @GetMapping("/register/sendsms/{phone}")
+    public Result sendCode(@PathVariable String phone) throws ClientException {
+//        如果用户不存在
+        userService.sendSMS(phone, "注册");
+        return ResultGenerator.genSuccessResult("发送成功");
+    }
+
+    @PostMapping("/register/validatecode")
+    public Result update(@RequestBody CodeInfo codeInfo) {
+//        如果用户不存在
+        String validateCodeEnum = userService.validateCode(codeInfo.getPhone(), codeInfo.getCode());
+        return ResultGenerator.genSuccessResult(validateCodeEnum);
+    }
+
+
 }
