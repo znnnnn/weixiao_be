@@ -129,16 +129,16 @@ public class SMSUtil {
 
     }
 
+    private static final char[] chars="1234567890".toCharArray();
+    private static Random random = new Random();
     public String getRandomCode() {
-        int codeLength = 4;
-        int randomCodeItem;
-        StringBuilder randomCode = new StringBuilder();
-        Random rand = new Random();
-        for (int j = 0; j < codeLength; j++) {
-            randomCodeItem = Math.abs(rand.nextInt() % 9);
-            randomCode.append(String.valueOf(randomCodeItem));
+        StringBuffer buffer = new StringBuffer();
+        int index;   //获取随机chars下标
+        for(int i=0;i<4;i++){
+            index = random.nextInt(chars.length);  //获取随机chars下标
+            buffer.append(chars[index]);
         }
-        return randomCode.toString();
+        return buffer.toString();
     }
 
     /**

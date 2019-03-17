@@ -26,6 +26,9 @@
 - 阿里云短信配置
     - [OpenAPI Explorer](https://api.aliyun.com/?spm=a2c4g.11186623.2.14.31a350a4SXcOam#/?product=Dysmsapi&api=SendSms)
     - [基于阿里大于的短信验证微服务 | 记路心晴](https://songwell1024.github.io/2019/01/06/CheckSmsCode/)
+- 文件上传、并整合进阿里云OSS对象存储
+    - [SpringBoot（十八） 文件上传下载](https://qq343509740.gitee.io/2018/08/04/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/SpringBoo2.x/SpringBoot%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/#HTML)
+    - [Springboot 迁移及上传文件至阿里云OSS](https://juejin.im/post/5baa3bf5e51d450e9a2e32b8)
     
 ## 开发建议
 - [RESTful API 接口实践 - 阮一峰](http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html)

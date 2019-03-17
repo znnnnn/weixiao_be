@@ -37,8 +37,8 @@ public class UserController {
     @ApiOperation(value="登录", notes="根据用户名密码进行登录")
     @ApiImplicitParam(name="user", value = "用户实体", required = true, dataType = "User")
     public Result login(@RequestBody User user) {
-        log.info("用户请求登录，获取Token");
         String token = userService.login(user);
+        log.info("用户请求登录，获取Token,{}", token);
 //        Map<String, String> map = new HashMap<String, String>();
 //        map.put();
         if (token != null) {
