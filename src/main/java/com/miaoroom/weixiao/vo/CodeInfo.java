@@ -33,7 +33,12 @@ public class CodeInfo {
 
         long cha = end.getTime() - generateCodeTime.getTime();
 
-        return cha < 300000;
+        // TODO 验证码五分钟之内的bug
+        System.out.println(end.getTime());
+        System.out.println(generateCodeTime.getTime());
+        System.out.println("是否在5分钟内");
+        System.out.println(cha<1);
+        return cha < 1;
     }
 
     @Autowired

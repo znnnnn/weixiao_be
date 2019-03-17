@@ -46,7 +46,7 @@ public class UserController {
         return ResultGenerator.genSuccessResult(token);
     }
 
-    @ApiOperation(value = "发送验证码", notes = "根据手机号发送验证码")
+    @ApiOperation(value = "发送登录验证码", notes = "根据手机号发送登录验证码")
     @GetMapping("/login/sendsms/{phone}")
     public Result sendLoginCode(@PathVariable String phone) throws ClientException {
 //        如果用户不存在
@@ -66,7 +66,7 @@ public class UserController {
             String token = userService.loginByCode(userLogin);
             return ResultGenerator.genSuccessResult(token);
         } else {
-            return ResultGenerator.genFailResult(ValidateCodeEnumMessage);
+            return ResultGenerator.genSuccessResult(ValidateCodeEnumMessage);
         }
 
     }
@@ -112,7 +112,7 @@ public class UserController {
         return ResultGenerator.genSuccessResult(pageInfo);
     }
 
-    @ApiOperation(value = "发送验证码", notes = "根据手机号发送验证码")
+    @ApiOperation(value = "发送注册验证码", notes = "根据手机号发送注册验证码")
     @GetMapping("/register/sendsms/{phone}")
     public Result sendRegisterCode(@PathVariable String phone) throws ClientException {
 //        如果用户不存在

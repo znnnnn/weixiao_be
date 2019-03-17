@@ -170,16 +170,18 @@ public class SMSUtil {
      */
     public ValidateCodeEnum validateCode(String phone, String code, Map<String, CodeInfo> codeInfoMap){
         Date now = new Date();
+//        判断是否发送过验证码
         if (codeInfoMap.containsKey(phone)) {
             CodeInfo codeInfo = codeInfoMap.get(phone);
+//            判断是否在五分钟内
             if (codeInfo.isCodeIn5Min(now)) {
                 System.out.println("传入的验证码为"+code);
                 System.out.println("记录的验证码为"+codeInfo.getCode());
                 return code.equals(codeInfo.getCode()) ? ValidateCodeEnum.SUCCESS : ValidateCodeEnum.FAIL;
             }
+            return ValidateCodeEnum.TIMEOUT;
         } else {
             return ValidateCodeEnum.FAIL;
         }
-        return ValidateCodeEnum.TIMEOUT;
     }
 }
