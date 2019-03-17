@@ -3,6 +3,7 @@ package com.miaoroom.weixiao.service.impl;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.miaoroom.weixiao.dao.UserMapper;
+import com.miaoroom.weixiao.enums.LoginEnum;
 import com.miaoroom.weixiao.enums.ValidateCodeEnum;
 import com.miaoroom.weixiao.model.User;
 import com.miaoroom.weixiao.service.UserService;
@@ -54,23 +55,43 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         //获取参数中的用户名密码
         String userLogin = user.getUserLogin();
         String userPass = user.getUserPass();
-//        获取数据库中的用户对象
+        if (userLogin == null) {
+            log.error("请求的用户名为空");
+            return "请求的用户名为空";
+        }
+
+//      获取数据库中的用户对象
         User userFromDb = userMapper.findByUserLogin(userLogin);
+        if (userFromDb == null) {
+            log.error(LoginEnum.NONE.getMessage());
+            return LoginEnum.NONE.getMessage();
+        }
         String salt = userFromDb.getUserSalt();
 //        生成加密密码
         String encodedUserPass = ShiroKit.md5(userPass, userLogin + salt);
-
 //        log.info("数据库密码:{}",userFromDb.getUserPass());
 //        log.info("本次加密密码:{}",encodedUserPass);
 //        log.info("密码是否正确:{}",userFromDb.getUserPass().equals(encodedUserPass));
 //        log.info("token本次:{}",userFromDb.getUserPass().equals(encodedUserPass) ? JWTUtil.sign(userLogin, encodedUserPass) : null);
-        return userFromDb.getUserPass().equals(encodedUserPass) ? JWTUtil.sign(userLogin, encodedUserPass) : null;
+        return userFromDb.getUserPass().equals(encodedUserPass) ? JWTUtil.sign(userLogin, encodedUserPass) : LoginEnum.ERROR.getMessage();
+    }
+
+
+    @Override
+    public String loginByCode(String userLogin) {
+//        获取数据库中的用户对象
+        User userFromDb = userMapper.findByUserLogin(userLogin);
+//        如果不存在这个用户
+        if (userFromDb == null) {
+            log.error(LoginEnum.NONE.getMessage());
+            return LoginEnum.NONE.getMessage();
+        }
+        String userPass = userFromDb.getUserPass();
+        return JWTUtil.sign(userLogin, userPass);
     }
 
     @Autowired
     SMSUtil smsUtil;
-
-
     /**
      * 该手机号的验证码和发送时间，用到了一个Map保存。
      */
@@ -78,6 +99,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     /**
      * 发送短信
+     *
      * @param phone
      * @throws ClientException
      */
@@ -90,13 +112,14 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     /**
      * 传入phone和code来验证是否正确
+     *
      * @param phone
      * @param code
      * @return
      */
     @Override
-    public String validateCode(String phone, String code){
-        return smsUtil.validateCode(phone, code , codeInfoMap);
+    public ValidateCodeEnum validateCode(String phone, String code) {
+        return smsUtil.validateCode(phone, code, codeInfoMap);
     }
 
 

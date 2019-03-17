@@ -29,6 +29,8 @@
 - 文件上传、并整合进阿里云OSS对象存储
     - [SpringBoot（十八） 文件上传下载](https://qq343509740.gitee.io/2018/08/04/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/SpringBoo2.x/SpringBoot%EF%BC%88%E5%8D%81%E5%85%AB%EF%BC%89%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/#HTML)
     - [Springboot 迁移及上传文件至阿里云OSS](https://juejin.im/post/5baa3bf5e51d450e9a2e32b8)
+    - [如何将multipart文件转换为文件？](https://codeday.me/bug/20171213/109115.html)
+    - [spring boot实现文件上传下载](http://songwei.site/2017/12/08/fileUpDown/)
     
 ## 开发建议
 - [RESTful API 接口实践 - 阮一峰](http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html)

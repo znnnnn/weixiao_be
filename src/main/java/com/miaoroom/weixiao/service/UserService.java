@@ -14,6 +14,7 @@ import java.util.Map;
 public interface UserService extends Service<User> {
     boolean isRepeated(String userLogin);
     String login(User user);
-    String validateCode(String phone, String code);
+    String loginByCode(String phone);
+    ValidateCodeEnum validateCode(String phone, String code);
     void sendSMS(String phone,String action) throws ClientException;
 }

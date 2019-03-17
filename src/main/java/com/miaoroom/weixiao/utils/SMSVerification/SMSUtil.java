@@ -129,7 +129,7 @@ public class SMSUtil {
 
     }
 
-    private static final char[] chars="1234567890".toCharArray();
+    private static final char[] chars="123456789".toCharArray();
     private static Random random = new Random();
     public String getRandomCode() {
         StringBuffer buffer = new StringBuffer();
@@ -168,18 +168,18 @@ public class SMSUtil {
      * @return
      * @throws ClientException
      */
-    public String validateCode(String phone, String code, Map<String, CodeInfo> codeInfoMap){
+    public ValidateCodeEnum validateCode(String phone, String code, Map<String, CodeInfo> codeInfoMap){
         Date now = new Date();
         if (codeInfoMap.containsKey(phone)) {
             CodeInfo codeInfo = codeInfoMap.get(phone);
             if (codeInfo.isCodeIn5Min(now)) {
                 System.out.println("传入的验证码为"+code);
                 System.out.println("记录的验证码为"+codeInfo.getCode());
-                return code.equals(codeInfo.getCode()) ? ValidateCodeEnum.SUCCESS.getMessage() : ValidateCodeEnum.FAIL.getMessage();
+                return code.equals(codeInfo.getCode()) ? ValidateCodeEnum.SUCCESS : ValidateCodeEnum.FAIL;
             }
         } else {
-            return ValidateCodeEnum.FAIL.getMessage();
+            return ValidateCodeEnum.FAIL;
         }
-        return ValidateCodeEnum.TIMEOUT.getMessage();
+        return ValidateCodeEnum.TIMEOUT;
     }
 }
