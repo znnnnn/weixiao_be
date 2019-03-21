@@ -30,15 +30,9 @@ public class CodeInfo {
 //        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-M-d HH:mm:ss"); 
 //        java.util.Date start = sdf.parse(date1);
         java.util.Date end = new Date();
-
         long cha = end.getTime() - generateCodeTime.getTime();
-
-        // TODO 验证码五分钟之内的bug
-        System.out.println(end.getTime());
-        System.out.println(generateCodeTime.getTime());
-        System.out.println("是否在5分钟内");
-        System.out.println(cha<1);
-        return cha < 1;
+        System.out.println(cha<300000);
+        return cha < 300000;
     }
 
     @Autowired

@@ -41,7 +41,6 @@ public class AliyunSmsTest extends Tester {
     private static final String accessKeyId = "LTAICq734h6sfksn";
     private static final String accessKeySecret = "U6zDeG1DcTb4I13JXbNOBGuA8ItUuv";
 
-    @Test
     public static SendSmsResponse sendSms() throws ClientException {
 
         //可自助调整超时时间
@@ -72,12 +71,12 @@ public class AliyunSmsTest extends Tester {
 
         //hint 此处可能会抛出异常，注意catch
         SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
-        System.out.println(sendSmsResponse);
 
         return sendSmsResponse;
     }
 
 
+    @Test
     public static QuerySendDetailsResponse querySendDetails(String bizId) throws ClientException {
 
         //可自助调整超时时间
@@ -93,7 +92,7 @@ public class AliyunSmsTest extends Tester {
         QuerySendDetailsRequest request = new QuerySendDetailsRequest();
         //必填-号码
         request.setPhoneNumber("15088997855");
-        //可选-流水号
+        //可选-流水号¡
         request.setBizId(bizId);
         //必填-发送日期 支持30天内记录查询，格式yyyyMMdd
         SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd");
@@ -108,6 +107,7 @@ public class AliyunSmsTest extends Tester {
 
         return querySendDetailsResponse;
     }
+
 
     public static void main(String[] args) throws ClientException, InterruptedException {
 

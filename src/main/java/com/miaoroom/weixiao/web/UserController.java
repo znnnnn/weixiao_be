@@ -60,7 +60,7 @@ public class UserController {
         String ValidateCodeEnumMessage = userService.validateCode(codeInfo.getPhone(), codeInfo.getCode()).getMessage();
 
 
-        if (ValidateCodeEnumMessage.equals("验证码正确")) {
+        if (ValidateCodeEnumMessage.equals(ValidateCodeEnum.SUCCESS.getMessage())) {
             //获得用户名
             String userLogin = codeInfo.getPhone();
             String token = userService.loginByCode(userLogin);
@@ -120,7 +120,7 @@ public class UserController {
         return ResultGenerator.genSuccessResult("发送成功");
     }
 
-    @ApiOperation(value = "验证码检测", notes = "判断用户发送服务器的验证码是否正确")
+    @ApiOperation(value = "注册验证码检测", notes = "判断用户发送服务器的注册验证码是否正确")
     @PostMapping("/register/validatecode")
     public Result update(@RequestBody CodeInfo codeInfo) {
 //        如果用户不存在

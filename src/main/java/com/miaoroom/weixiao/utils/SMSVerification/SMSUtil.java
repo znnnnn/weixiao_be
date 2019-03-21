@@ -15,6 +15,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.miaoroom.weixiao.enums.ValidateCodeEnum;
 import com.miaoroom.weixiao.vo.CodeInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,7 @@ import java.util.Random;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class SMSUtil {
 
     //产品名称:云通信短信API产品,开发者无需替换
@@ -77,6 +79,36 @@ public class SMSUtil {
             System.out.println("Message=" + sendSmsResponse.getMessage());
             System.out.println("RequestId=" + sendSmsResponse.getRequestId());
             System.out.println("BizId=" + sendSmsResponse.getBizId());
+
+
+
+            //查明细
+            if(sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
+//                System.out.println(mobile);
+//                System.out.println(sendSmsResponse.getBizId());
+                QuerySendDetailsResponse querySendDetailsResponse = querySendDetails(mobile, sendSmsResponse.getBizId());
+                System.out.println("短信明细查询接口返回数据----------------");
+//                System.out.println("Code=" + querySendDetailsResponse.getCode());
+//                System.out.println("Message=" + querySendDetailsResponse.getMessage());
+                int i = 0;
+                for(QuerySendDetailsResponse.SmsSendDetailDTO smsSendDetailDTO : querySendDetailsResponse.getSmsSendDetailDTOs())
+                {
+                    System.out.println("SmsSendDetailDTO["+i+"]:");
+                    System.out.println("Content=" + smsSendDetailDTO.getContent());
+                    System.out.println("ErrCode=" + smsSendDetailDTO.getErrCode());
+                    System.out.println("OutId=" + smsSendDetailDTO.getOutId());
+                    System.out.println("PhoneNum=" + smsSendDetailDTO.getPhoneNum());
+                    System.out.println("ReceiveDate=" + smsSendDetailDTO.getReceiveDate());
+                    System.out.println("SendDate=" + smsSendDetailDTO.getSendDate());
+                    System.out.println("SendStatus=" + smsSendDetailDTO.getSendStatus());
+                    System.out.println("Template=" + smsSendDetailDTO.getTemplateCode());
+                }
+                System.out.println("TotalCount=" + querySendDetailsResponse.getTotalCount());
+                System.out.println("RequestId=" + querySendDetailsResponse.getRequestId());
+            }
+
+
+
             return sendSmsResponse;
         } catch (ServerException e) {
             e.printStackTrace();
@@ -117,7 +149,8 @@ public class SMSUtil {
         //hint 此处可能会抛出异常，注意catch
         try {
             QuerySendDetailsResponse querySendDetailsResponse = acsClient.getAcsResponse(request);
-            System.out.println(querySendDetailsResponse);
+//            System.out.println("内容为");
+//            log.info("内容为：{}",querySendDetailsResponse.getSmsSendDetailDTOs().get(0).getContent());
             return querySendDetailsResponse;
         } catch (ServerException e) {
             e.printStackTrace();
@@ -142,8 +175,9 @@ public class SMSUtil {
     }
 
     /**
-     * 根据手机号和用户操作的动作，进行发送短信
-     * 该记录应该在调用处存入Map
+     * 1、随机生成code
+     * 2、根据手机号和action，发送短信给用户
+     * 3、返回值为单条记录，应在对应的service中存入Map或其他持久化操作
      * @param phone
      * @param action
      * @return 手机号和验证码对应的记录
@@ -151,11 +185,13 @@ public class SMSUtil {
      */
     public CodeInfo sendSMS2codeInfo(String phone, String action) throws ClientException {
         String code = getRandomCode();
+//        log.info("本次随机生成的验证码为：{}", code);
+        System.out.println("本次随机生成的验证码为："+ code);
 //        生成手机号和code对应关系
         CodeInfo codeInfo = new CodeInfo(phone, code, action, new Date());
-        if (!phone.equals("")) {
-            SendSmsResponse sendSmsResponse = sendSms(phone, "SMS_160306918", "微校", "{\"name\":\"Tom\", \"code\":" + code + "}");
-        }
+//        if (!phone.equals("")) {
+//            SendSmsResponse sendSmsResponse = sendSms(phone, "SMS_160306918", "微校", "{\"name\":\"Tom\", \"code\":" + code + "}");
+//        }
         return codeInfo;
 //        codeInfoMap.put(phone, codeInfo);
     }
@@ -169,12 +205,12 @@ public class SMSUtil {
      * @throws ClientException
      */
     public ValidateCodeEnum validateCode(String phone, String code, Map<String, CodeInfo> codeInfoMap){
-        Date now = new Date();
+//        Date now = new Date();
 //        判断是否发送过验证码
         if (codeInfoMap.containsKey(phone)) {
             CodeInfo codeInfo = codeInfoMap.get(phone);
 //            判断是否在五分钟内
-            if (codeInfo.isCodeIn5Min(now)) {
+            if (codeInfo.isCodeIn5Min(codeInfo.getDate())) {
                 System.out.println("传入的验证码为"+code);
                 System.out.println("记录的验证码为"+codeInfo.getCode());
                 return code.equals(codeInfo.getCode()) ? ValidateCodeEnum.SUCCESS : ValidateCodeEnum.FAIL;
