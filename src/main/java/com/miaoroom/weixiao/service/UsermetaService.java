@@ -9,4 +9,5 @@ import com.miaoroom.weixiao.core.Service;
  */
 public interface UsermetaService extends Service<Usermeta> {
     boolean setUsermeta(SetUsermeta usermeta);
+    Usermeta myHome(String token);
 }

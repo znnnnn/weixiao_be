@@ -10,12 +10,14 @@ import com.miaoroom.weixiao.service.UserService;
 import com.miaoroom.weixiao.service.UsermetaService;
 import com.miaoroom.weixiao.core.AbstractService;
 import com.miaoroom.weixiao.shiro.ShiroKit;
+import com.miaoroom.weixiao.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -55,5 +57,24 @@ public class UsermetaServiceImpl extends AbstractService<Usermeta> implements Us
 //            usermetaMapper.insertUserMeta();
         }
         return false;
+    }
+
+    @Override
+    public Usermeta myHome(String token) {
+        System.out.println(JWTUtil.getUsername(token));
+        String userLogin = JWTUtil.getUsername(token);
+        Long userId = userMapper.findByUserLogin(userLogin).getUserId();
+//        Usermeta usermeta = new Usermeta();
+//        usermeta.setUserId(userId);
+        Usermeta result = usermetaService.findBy("userId", userId);
+        if (result == null) {
+            Usermeta defaultUsermeta = new Usermeta();
+            defaultUsermeta.setUserId(userId);
+            defaultUsermeta.setNickname(userLogin);
+            defaultUsermeta.setAvatar("https://cn.gravatar.com/avatar/d28a39eb534d6d92d5320bdd92f525ae?d=https%3A%2F%2Fwww.miaoroom.com%2Fwp-content%2Fthemes%2FCute_0130%2Fassets%2Fimg%2Favatar%2Favatar_medium.png&s=64");
+            usermetaService.save(defaultUsermeta);
+            return defaultUsermeta;
+        }
+        return result;
     }
 }

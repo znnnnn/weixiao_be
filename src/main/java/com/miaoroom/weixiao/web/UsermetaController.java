@@ -21,19 +21,27 @@ public class UsermetaController {
     @Resource
     private UsermetaService usermetaService;
 
+    @GetMapping("/myhome")
+    public Result myHome(@RequestParam String token) {
+//        usermetaService.setUsermeta(usermeta);
+        Usermeta usermeta = usermetaService.myHome(token);
+        System.out.println(usermeta.getNickname());
+        return ResultGenerator.genSuccessResult(usermeta);
+    }
+
     @PostMapping("/set")
     public Result setUsermeta(@RequestBody SetUsermeta usermeta) {
-        System.out.println(usermeta.getUserLogin());
-        System.out.println(usermeta.getUserPass());
-        System.out.println(usermeta.getNickname());
-        System.out.println(usermeta.getTruename());
-        System.out.println(usermeta.getSex());
-        System.out.println(usermeta.getAvatar());
-        System.out.println(usermeta.getSchool());
-        System.out.println(usermeta.getMajor());
-        System.out.println(usermeta.getJob());
-        System.out.println(usermeta.getAdmission());
-        System.out.println(usermeta.getEducation());
+//        System.out.println(usermeta.getUserLogin());
+//        System.out.println(usermeta.getUserPass());
+//        System.out.println(usermeta.getNickname());
+//        System.out.println(usermeta.getTruename());
+//        System.out.println(usermeta.getSex());
+//        System.out.println(usermeta.getAvatar());
+//        System.out.println(usermeta.getSchool());
+//        System.out.println(usermeta.getMajor());
+//        System.out.println(usermeta.getJob());
+//        System.out.println(usermeta.getAdmission());
+//        System.out.println(usermeta.getEducation());
         usermetaService.setUsermeta(usermeta);
 //        usermetaService.save(usermeta);
         return ResultGenerator.genSuccessResult();
@@ -45,11 +53,11 @@ public class UsermetaController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
-        usermetaService.deleteById(id);
-        return ResultGenerator.genSuccessResult();
-    }
+//    @DeleteMapping("/{id}")
+//    public Result delete(@PathVariable Integer id) {
+//        usermetaService.deleteById(id);
+//        return ResultGenerator.genSuccessResult();
+//    }
 
     @PutMapping
     public Result update(@RequestBody Usermeta usermeta) {
