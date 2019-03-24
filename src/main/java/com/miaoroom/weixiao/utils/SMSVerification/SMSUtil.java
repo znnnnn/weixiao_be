@@ -189,6 +189,9 @@ public class SMSUtil {
         System.out.println("本次随机生成的验证码为："+ code);
 //        生成手机号和code对应关系
         CodeInfo codeInfo = new CodeInfo(phone, code, action, new Date());
+
+
+//        发送短信
 //        if (!phone.equals("")) {
 //            SendSmsResponse sendSmsResponse = sendSms(phone, "SMS_160306918", "微校", "{\"name\":\"Tom\", \"code\":" + code + "}");
 //        }

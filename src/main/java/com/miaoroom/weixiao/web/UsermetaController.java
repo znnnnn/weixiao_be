@@ -7,6 +7,7 @@ import com.miaoroom.weixiao.model.Usermeta;
 import com.miaoroom.weixiao.service.UsermetaService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,19 +16,12 @@ import java.util.List;
 /**
 * Created by CodeGenerator on 2019/03/21.
 */
+@Slf4j
 @RestController
 @RequestMapping("/usermeta")
 public class UsermetaController {
     @Resource
     private UsermetaService usermetaService;
-
-    @GetMapping("/myhome")
-    public Result myHome(@RequestParam String token) {
-//        usermetaService.setUsermeta(usermeta);
-        Usermeta usermeta = usermetaService.myHome(token);
-        System.out.println(usermeta.getNickname());
-        return ResultGenerator.genSuccessResult(usermeta);
-    }
 
     @PostMapping("/set")
     public Result setUsermeta(@RequestBody SetUsermeta usermeta) {
@@ -61,6 +55,9 @@ public class UsermetaController {
 
     @PutMapping
     public Result update(@RequestBody Usermeta usermeta) {
+        System.out.println(usermeta.getNickname());
+        Long umetaId = usermetaService.findBy("userId", usermeta.getUserId()).getUmetaId();
+        usermeta.setUmetaId(umetaId);
         usermetaService.update(usermeta);
         return ResultGenerator.genSuccessResult();
     }
@@ -73,9 +70,23 @@ public class UsermetaController {
 
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+        log.info("获取了一次用户信息列表");
         PageHelper.startPage(page, size);
         List<Usermeta> list = usermetaService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    /**
+     * 前端通过token获取用户信息
+     * @param token
+     * @return
+     */
+    @GetMapping("/myhome")
+    public Result myHome(@RequestParam String token) {
+//        usermetaService.setUsermeta(usermeta);
+        Usermeta usermeta = usermetaService.myHome(token);
+//        System.out.println(usermeta.getNickname());
+        return ResultGenerator.genSuccessResult(usermeta);
     }
 }

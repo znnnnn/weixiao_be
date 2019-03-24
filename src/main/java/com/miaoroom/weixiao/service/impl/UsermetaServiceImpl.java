@@ -61,20 +61,30 @@ public class UsermetaServiceImpl extends AbstractService<Usermeta> implements Us
 
     @Override
     public Usermeta myHome(String token) {
-        System.out.println(JWTUtil.getUsername(token));
+//        System.out.println(JWTUtil.getUsername(token));
         String userLogin = JWTUtil.getUsername(token);
         Long userId = userMapper.findByUserLogin(userLogin).getUserId();
 //        Usermeta usermeta = new Usermeta();
 //        usermeta.setUserId(userId);
         Usermeta result = usermetaService.findBy("userId", userId);
+//        查询是否存在用户信息，如果不存在则新建默认一条
         if (result == null) {
             Usermeta defaultUsermeta = new Usermeta();
             defaultUsermeta.setUserId(userId);
             defaultUsermeta.setNickname(userLogin);
-            defaultUsermeta.setAvatar("https://cn.gravatar.com/avatar/d28a39eb534d6d92d5320bdd92f525ae?d=https%3A%2F%2Fwww.miaoroom.com%2Fwp-content%2Fthemes%2FCute_0130%2Fassets%2Fimg%2Favatar%2Favatar_medium.png&s=64");
+            defaultUsermeta.setAvatar("http://111.67.196.209/wp-content/uploads/2019/03/avatar"+(int)(Math.random()*17+1)+".png");
+            defaultUsermeta.setJob("在校学生");
+            defaultUsermeta.setSchool("斯坦福大学");
             usermetaService.save(defaultUsermeta);
             return defaultUsermeta;
         }
         return result;
+    }
+
+
+    @Override
+    public Usermeta userHome(String userId) {
+        Usermeta result = usermetaService.findBy("userId", userId);
+        return null;
     }
 }

@@ -17,6 +17,7 @@
 - MyBatis（[查看官方中文文档](http://www.mybatis.org/mybatis-3/zh/index.html)）
 - MyBatisb通用Mapper插件（[查看官方中文文档](https://mapperhelper.github.io/docs/)）
     - [轻松搞定增删改查 - MyBatis通用Mapper介绍与使用](https://juejin.im/entry/5a3b482cf265da431281152b)
+    - [在Spring Boot项目中使用MyBatis通用 Mapper插件](https://www.jianshu.com/p/b0af2c0a7a9d)
 - MyBatis PageHelper分页插件（[查看官方中文文档](https://pagehelper.github.io/)）
 - Druid Spring Boot Starter（[查看官方中文文档](https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter/)）
 - Fastjson（[查看官方中文文档](https://github.com/Alibaba/fastjson/wiki/%E9%A6%96%E9%A1%B5)）
