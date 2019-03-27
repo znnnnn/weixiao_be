@@ -23,6 +23,11 @@ public class UsermetaController {
     @Resource
     private UsermetaService usermetaService;
 
+    /**
+     * 使用 User 和 Usermeta 的DTO进行注册
+     * @param usermeta
+     * @return
+     */
     @PostMapping("/set")
     public Result setUsermeta(@RequestBody SetUsermeta usermeta) {
 //        System.out.println(usermeta.getUserLogin());
@@ -56,8 +61,8 @@ public class UsermetaController {
     @PutMapping
     public Result update(@RequestBody Usermeta usermeta) {
         System.out.println(usermeta.getNickname());
-        Long umetaId = usermetaService.findBy("userId", usermeta.getUserId()).getUmetaId();
-        usermeta.setUmetaId(umetaId);
+//        Long umetaId = usermetaService.findBy("userId", usermeta.getUserId()).getUmetaId();
+//
         usermetaService.update(usermeta);
         return ResultGenerator.genSuccessResult();
     }

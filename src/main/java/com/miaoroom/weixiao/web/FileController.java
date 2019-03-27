@@ -30,7 +30,7 @@ public class FileController {
     /**
      * 提取上传方法为公共方法
      */
-    private void executeUpload(String uploadDir, MultipartFile file) throws IOException {
+    private String executeUpload(String uploadDir, MultipartFile file) throws IOException {
         if (file == null || file.isEmpty() || file.getSize() == 0) {
 //            return ResultUtils.error(ResultCode.UPLOAD_FILE_EMPTY);
             System.out.println("空文件");
@@ -47,6 +47,7 @@ public class FileController {
         String fileName = OSSUploadUtil.uploadFile(MultipartFile2File.convert(file), fileType);
         System.out.println("OSS中的url为："+fileName);
         map.put(file.getName(), fileName);
+        return fileName;
     }
 
     /**
@@ -68,13 +69,14 @@ public class FileController {
                 dir.mkdir();
             }
             //调用上传方法
-            executeUpload(uploadDir, file);
+            String ossUrl = executeUpload(uploadDir, file);
+            return ResultGenerator.genSuccessResult(ossUrl);
         } catch (Exception e) {
             // 打印错误堆栈信息
             e.printStackTrace();
             return ResultGenerator.genFailResult("上传失败");
         }
-        return ResultGenerator.genFailResult("上传成功");
+
     }
 
     /**
@@ -106,7 +108,7 @@ public class FileController {
             e.printStackTrace();
             return ResultGenerator.genFailResult("上传失败");
         }
-        return ResultGenerator.genFailResult("上传成功");
+        return ResultGenerator.genSuccessResult("上传成功");
     }
 
     /**

@@ -124,8 +124,13 @@ public class UserController {
     @PostMapping("/register/validatecode")
     public Result update(@RequestBody CodeInfo codeInfo) {
 //        如果用户不存在
-        String validateCodeEnum = userService.validateCode(codeInfo.getPhone(), codeInfo.getCode()).getMessage();
-        return ResultGenerator.genSuccessResult(validateCodeEnum);
+        if (userService.isRepeated(codeInfo.getPhone())){
+            String validateCodeEnum = userService.validateCode(codeInfo.getPhone(), codeInfo.getCode()).getMessage();
+            return ResultGenerator.genSuccessResult(validateCodeEnum);
+        }
+        else {
+            return ResultGenerator.genSuccessResult("该用户名已注册");
+        }
     }
 
 }
