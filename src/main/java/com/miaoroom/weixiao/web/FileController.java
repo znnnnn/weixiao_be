@@ -30,7 +30,7 @@ public class FileController {
     /**
      * 提取上传方法为公共方法
      */
-    private String executeUpload(String uploadDir, MultipartFile file) throws IOException {
+    private String executeUpload(/*String uploadDir,*/ MultipartFile file) throws IOException {
         if (file == null || file.isEmpty() || file.getSize() == 0) {
 //            return ResultUtils.error(ResultCode.UPLOAD_FILE_EMPTY);
             System.out.println("空文件");
@@ -45,7 +45,7 @@ public class FileController {
         String fileType = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
         //OSS单文件上传,返回上传成功后的oss存储服务器中的url
         String fileName = OSSUploadUtil.uploadFile(MultipartFile2File.convert(file), fileType);
-        System.out.println("OSS中的url为："+fileName);
+        System.out.println("OSS中的url为：" + fileName);
         map.put(file.getName(), fileName);
         return fileName;
     }
@@ -58,18 +58,18 @@ public class FileController {
     public Result upload(HttpServletRequest request, MultipartFile file) {
         try {
             // 上传目录地址(相对路径)
-            String uploadDir = request.getSession().getServletContext().getRealPath("/") + "upload/";
+//            String uploadDir = request.getSession().getServletContext().getRealPath("/") + "upload/";
             // 上传目录地址(绝对路径)
 //            String uploadDir = "f:/test/";
 //            // 输出地址 - 测试
 //            System.out.println(uploadDir);
-            File dir = new File(uploadDir);
+//            File dir = new File(uploadDir);
             // 如果目录不存在，自动创建文件夹
-            if (!dir.exists()) {
-                dir.mkdir();
-            }
+//            if (!dir.exists()) {
+//                dir.mkdir();
+//            }
             //调用上传方法
-            String ossUrl = executeUpload(uploadDir, file);
+            String ossUrl = executeUpload(file);
             return ResultGenerator.genSuccessResult(ossUrl);
         } catch (Exception e) {
             // 打印错误堆栈信息
@@ -100,7 +100,8 @@ public class FileController {
             for (int i = 0; i < files.length; i++) {
                 if (files[i] != null) {
                     // 调用上传方法
-                    executeUpload(uploadDir, files[i]);
+//                    executeUpload(uploadDir, files[i]);
+                    executeUpload(files[i]);
                 }
             }
         } catch (Exception e) {

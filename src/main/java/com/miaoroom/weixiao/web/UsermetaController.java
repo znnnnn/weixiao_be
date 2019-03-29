@@ -69,7 +69,8 @@ public class UsermetaController {
 
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
-        Usermeta usermeta = usermetaService.findById(id);
+//        System.out.println(id);
+        Usermeta usermeta = usermetaService.findBy("umetaId", Long.valueOf(id));
         return ResultGenerator.genSuccessResult(usermeta);
     }
 

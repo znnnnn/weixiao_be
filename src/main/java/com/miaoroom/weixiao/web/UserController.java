@@ -100,7 +100,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
-        User user = userService.findById(id);
+//        User user = userService.findById(id);
+        User user = userService.findBy("userId", Long.valueOf(id));
         return ResultGenerator.genSuccessResult(user);
     }
 
