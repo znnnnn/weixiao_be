@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
+
 @ApiModel(value="Posts")
 public class Posts {
     /**
@@ -77,7 +78,15 @@ public class Posts {
      */
     @Transient
     private List<Upvote> upvoteList;
-//    private String name;
+
+    public List<Upvote> getUpvoteList() {
+        return upvoteList;
+    }
+
+    public void setUpvoteList(List<Upvote> upvoteList) {
+        this.upvoteList = upvoteList;
+    }
+    //    private String name;
 
     /**
      * 获取主键

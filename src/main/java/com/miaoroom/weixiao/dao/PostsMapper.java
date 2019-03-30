@@ -23,8 +23,7 @@ public interface PostsMapper extends Mapper<Posts> {
 //            // 将 image 的 link 和 product 的 id 绑定，通过 @Many 查询 返回 List
 //            @Result(property = "upvoteUserId", column = "post_author", javaType = List.class, many = @Many(select = "com.miaoroom.weixiao.dao.PostsMapper.getUpvoteByUserId")),
 //    })
-    Posts findByPostAuthor(Long postAuthor);
-    Posts findByPostAuthor();
+    List<Posts> findByPostAuthor(Long postAuthor);
 
     @Select("SELECT * FROM posts")
     @ResultMap("BaseResultMap")

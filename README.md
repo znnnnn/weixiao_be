@@ -15,6 +15,8 @@
 ## 技术选型&文档
 - Spring Boot（[查看Spring Boot学习&使用指南](http://www.jianshu.com/p/1a9fd8936bd8)）
 - MyBatis（[查看官方中文文档](http://www.mybatis.org/mybatis-3/zh/index.html)）
+    - [MyBatis学习笔记（六）：一对一，一对多及鉴别器映射](https://zjxkenshine.github.io/2018/04/01/MyBatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2-%E6%98%A0%E5%B0%84/)
+    - [MyBatis 关联映射之一对多](https://blog.csdn.net/u010858605/article/details/70170979)
 - MyBatisb通用Mapper插件（[查看官方中文文档](https://mapperhelper.github.io/docs/)）
     - [轻松搞定增删改查 - MyBatis通用Mapper介绍与使用](https://juejin.im/entry/5a3b482cf265da431281152b)
     - [在Spring Boot项目中使用MyBatis通用 Mapper插件](https://www.jianshu.com/p/b0af2c0a7a9d)
