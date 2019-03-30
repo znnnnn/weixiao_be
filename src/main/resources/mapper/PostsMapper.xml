@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.miaoroom.weixiao.dao.PostsMapper">
-  <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Posts">
+  <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Posts" extends="com.miaoroom.weixiao.dao.UpvoteMapper.BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -10,9 +10,28 @@
     <result column="post_date" jdbcType="TIMESTAMP" property="postDate" />
     <result column="post_status" jdbcType="VARCHAR" property="postStatus" />
     <result column="post_modified" jdbcType="TIMESTAMP" property="postModified" />
-    <result column="post_cat" jdbcType="BIGINT" property="postCat" />
+    <result column="post_cat" jdbcType="VARCHAR" property="postCat" />
     <result column="post_content" jdbcType="LONGVARCHAR" property="postContent" />
     <result column="post_title" jdbcType="LONGVARCHAR" property="postTitle" />
     <result column="post_image" jdbcType="LONGVARCHAR" property="postImage" />
+
+    <!--Map里边的名为property的javaType类型引用使用select方法以column作为参数查找-->
+    <collection property="upvoteList"
+                column="upvoteID"
+                select="com.miaoroom.weixiao.dao.UpvoteMapper.getUpvoteByUserId">
+                <!--javaType="com.miaoroom.weixiao.model.Upvote">-->
+                 <!--column="upvoteID">-->
+      <id column="upvoteID" jdbcType="BIGINT" property="upvoteid" />
+      <result column="upvote_post_ID" jdbcType="BIGINT" property="upvotePostId" />
+      <result column="upvote_user_ID" jdbcType="BIGINT" property="upvoteUserId" />
+    </collection>
   </resultMap>
+
+  <select id="findByPostAuthor"  resultMap="BaseResultMap">
+#     select * from posts,upvote where posts.post_author = upvote.upvote_post_ID
+#     select * from upvote where upvote_user_ID = #{upvote_user_ID};
+    select * from posts
+  </select>
+
+
 </mapper>

@@ -1,5 +1,6 @@
 package com.miaoroom.weixiao.service.impl;
 
+import com.miaoroom.weixiao.DTO.PostsListItemDTO;
 import com.miaoroom.weixiao.dao.PostsMapper;
 import com.miaoroom.weixiao.model.Posts;
 import com.miaoroom.weixiao.service.PostsService;
@@ -19,4 +20,8 @@ public class PostsServiceImpl extends AbstractService<Posts> implements PostsSer
     @Resource
     private PostsMapper postsMapper;
 
+    @Override
+    public PostsListItemDTO getPostsList() {
+        return null;
+    }
 }

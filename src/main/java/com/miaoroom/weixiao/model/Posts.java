@@ -3,6 +3,7 @@ package com.miaoroom.weixiao.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @ApiModel(value="Posts")
@@ -44,11 +45,11 @@ public class Posts {
     private Date postModified;
 
     /**
-     * 文章类目
+     * 文章类目: 动态：dynamic
      */
     @Column(name = "post_cat")
-    @ApiModelProperty(value="文章类目")
-    private Long postCat;
+    @ApiModelProperty(value="文章类目: 动态：dynamic")
+    private String postCat;
 
     /**
      * 文章内容
@@ -70,6 +71,13 @@ public class Posts {
     @Column(name = "post_image")
     @ApiModelProperty(value="文章内的图片")
     private String postImage;
+
+    /**
+     * 点赞
+     */
+    @Transient
+    private List<Upvote> upvoteList;
+//    private String name;
 
     /**
      * 获取主键
@@ -162,20 +170,20 @@ public class Posts {
     }
 
     /**
-     * 获取文章类目
+     * 获取文章类目: 动态：dynamic
      *
-     * @return post_cat - 文章类目
+     * @return post_cat - 文章类目: 动态：dynamic
      */
-    public Long getPostCat() {
+    public String getPostCat() {
         return postCat;
     }
 
     /**
-     * 设置文章类目
+     * 设置文章类目: 动态：dynamic
      *
-     * @param postCat 文章类目
+     * @param postCat 文章类目: 动态：dynamic
      */
-    public void setPostCat(Long postCat) {
+    public void setPostCat(String postCat) {
         this.postCat = postCat;
     }
 

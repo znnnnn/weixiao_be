@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miaoroom.weixiao.dao.UpvoteMapper">
+  <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Upvote">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="upvoteID" jdbcType="BIGINT" property="upvoteid" />
+    <result column="upvote_post_ID" jdbcType="BIGINT" property="upvotePostId" />
+    <result column="upvote_user_ID" jdbcType="BIGINT" property="upvoteUserId" />
+  </resultMap>
+
+  <select id="getUpvoteByUserId" parameterType="Long" resultMap="BaseResultMap">
+    SELECT * FROM upvote where upvote_user_ID = #{upvote_user_ID}
+  </select>
+</mapper>
