@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.miaoroom.weixiao.dao.CommentsMapper">
-  <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Comments">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="comment_ID" jdbcType="BIGINT" property="commentId" />
-    <result column="comment_post_ID" jdbcType="BIGINT" property="commentPostId" />
-    <result column="comment_user_ID" jdbcType="BIGINT" property="commentUserId" />
-    <result column="comment_author" jdbcType="VARCHAR" property="commentAuthor" />
-    <result column="comment_IP" jdbcType="VARCHAR" property="commentIp" />
-    <result column="comment_date" jdbcType="TIMESTAMP" property="commentDate" />
-    <result column="comment_parent" jdbcType="BIGINT" property="commentParent" />
-    <result column="comment_type" jdbcType="VARCHAR" property="commentType" />
-    <result column="comment_content" jdbcType="LONGVARCHAR" property="commentContent" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Comments">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="comment_ID" jdbcType="BIGINT" property="commentId"/>
+        <result column="comment_post_ID" jdbcType="BIGINT" property="commentPostId"/>
+        <result column="comment_user_ID" jdbcType="BIGINT" property="commentUserId"/>
+        <result column="comment_author" jdbcType="VARCHAR" property="commentAuthor"/>
+        <result column="comment_IP" jdbcType="VARCHAR" property="commentIp"/>
+        <result column="comment_date" jdbcType="TIMESTAMP" property="commentDate"/>
+        <result column="comment_parent" jdbcType="BIGINT" property="commentParent"/>
+        <result column="comment_type" jdbcType="VARCHAR" property="commentType"/>
+        <result column="comment_content" jdbcType="LONGVARCHAR" property="commentContent"/>
+    </resultMap>
+
+    <resultMap id="CommentsUsermetaDTOMap" type="com.miaoroom.weixiao.DTO.CommentsUsermetaDTO" extends="BaseResultMap">
+        <association property="usermeta" resultMap="com.miaoroom.weixiao.dao.UsermetaMapper.BaseResultMap"/>
+    </resultMap>
 </mapper>

@@ -25,7 +25,5 @@ public interface PostsMapper extends Mapper<Posts> {
 //    })
     List<Posts> findByPostAuthor(Long postAuthor);
 
-    @Select("SELECT * FROM posts")
-    @ResultMap("BaseResultMap")
     List<Posts> findAll();
 }

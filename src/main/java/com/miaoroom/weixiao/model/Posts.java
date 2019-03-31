@@ -25,6 +25,13 @@ public class Posts {
     private Long postAuthor;
 
     /**
+     * 作者的用户ID
+     */
+    @Column(name = "post_author_device")
+    @ApiModelProperty(value="作者的设备信息")
+    private String postAuthorDevice;
+
+    /**
      * 创作时间
      */
     @Column(name = "post_date")
@@ -86,7 +93,7 @@ public class Posts {
     public void setUpvoteList(List<Upvote> upvoteList) {
         this.upvoteList = upvoteList;
     }
-    //    private String name;
+
 
     /**
      * 获取主键
@@ -248,5 +255,17 @@ public class Posts {
      */
     public void setPostImage(String postImage) {
         this.postImage = postImage;
+    }
+
+    /**
+     * 用户设备信息
+     * @return
+     */
+    public String getPostAuthorDevice() {
+        return postAuthorDevice;
+    }
+
+    public void setPostAuthorDevice(String postAuthorDevice) {
+        this.postAuthorDevice = postAuthorDevice;
     }
 }

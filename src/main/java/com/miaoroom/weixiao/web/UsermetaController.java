@@ -74,6 +74,15 @@ public class UsermetaController {
         return ResultGenerator.genSuccessResult(usermeta);
     }
 
+    @GetMapping("/user/{userId}")
+    public Result getUsermetaByUserId(@PathVariable Integer userId){
+//        System.out.println(id);
+        Usermeta usermeta = usermetaService.findBy("userId", Long.valueOf(userId));
+        System.out.println("获取了用户ID:"+ String.valueOf(userId) + "的用户信息");
+        System.out.println(usermeta);
+        return ResultGenerator.genSuccessResult(usermeta);
+    }
+
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         log.info("获取了一次用户信息列表");

@@ -28,9 +28,10 @@ public class PostsMapperTest extends Tester {
 
     @Test
     public void findByAuthor() {
-        System.out.println(111111111);
-        List<Posts> posts = postsMapper.findByPostAuthor(15L);
-        System.out.println(posts.get(0).getUpvoteList().get(0).getUpvoteUserId());
+//        System.out.println(111111111);
+        List<Posts> posts = postsMapper.findByPostAuthor(25L);
+//        if (posts != null) System.out.println(posts);
+//        else System.out.println("null");
 
 //        System.out.println(upvoteMapper.getUpvoteByUserId(15L).get(0).getUpvoteUserId());
 
