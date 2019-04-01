@@ -19,21 +19,21 @@
     <!--Map里边的名为property的javaType类型引用使用select方法以column作为参数查找-->
 
   </resultMap>
-  <resultMap type="com.miaoroom.weixiao.DTO.PostsListItemDTO" id="PostsListItemDTO" extends="BaseResultMap">
-    <association property="usermeta" resultMap="com.miaoroom.weixiao.dao.UsermetaMapper.BaseResultMap" />
-    <collection property="upvoteList" ofType="com.miaoroom.weixiao.model.Upvote" resultMap="com.miaoroom.weixiao.dao.UpvoteMapper.BaseResultMap" />
-    <collection property="commentsUsermetaDTOList" ofType="com.miaoroom.weixiao.DTO.CommentsUsermetaDTO" resultMap="com.miaoroom.weixiao.dao.CommentsMapper.CommentsUsermetaDTOMap" />
-  </resultMap>
+
+    <resultMap type="com.miaoroom.weixiao.DTO.PostsListItemDTO" id="PostsListItemDTO" extends="BaseResultMap">
+        <association property="usermeta" resultMap="com.miaoroom.weixiao.dao.UsermetaMapper.BaseResultMap" />
+        <collection property="upvoteList" ofType="com.miaoroom.weixiao.model.Upvote" resultMap="com.miaoroom.weixiao.dao.UpvoteMapper.BaseResultMap" />
+        <collection property="commentsUsermetaDTOList"  column="post_ID" ofType="com.miaoroom.weixiao.DTO.CommentsUsermetaDTO"  select="com.miaoroom.weixiao.dao.CommentsMapper.findCommentUsermeta" />
+    </resultMap>
 
   <select id="findByPostAuthor"  resultMap="PostsListItemDTO">
     select * from posts LEFT JOIN upvote
                                   on posts.post_ID = upvote_post_ID
-                        LEFT JOIN comments
-                                  on posts.post_ID = comments.comment_post_ID
                         LEFT JOIN usermeta
                                   on posts.post_author = usermeta.user_ID
-    WHERE post_author = #{upvote_user_ID};
+    WHERE post_author = #{post_author};
   </select>
+
 
   <select id="findAll"  resultMap="PostsListItemDTO">
     select * from posts LEFT JOIN upvote

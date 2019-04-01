@@ -19,4 +19,9 @@
     <resultMap id="CommentsUsermetaDTOMap" type="com.miaoroom.weixiao.DTO.CommentsUsermetaDTO" extends="BaseResultMap">
         <association property="usermeta" resultMap="com.miaoroom.weixiao.dao.UsermetaMapper.BaseResultMap"/>
     </resultMap>
+
+    <select id="findCommentUsermeta" resultMap="com.miaoroom.weixiao.dao.CommentsMapper.CommentsUsermetaDTOMap">
+        SELECT * from comments LEFT JOIN usermeta on comments.comment_user_ID = usermeta.user_ID
+        where comments.comment_post_ID = #{post_ID}
+    </select>
 </mapper>

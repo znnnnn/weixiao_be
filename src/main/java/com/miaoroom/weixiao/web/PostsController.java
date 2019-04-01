@@ -46,7 +46,7 @@ public class PostsController {
     @GetMapping("/user/{userId}")
     public Result getPostsByUserId(@PathVariable Integer userId) {
 //        Posts posts = postsService.findById(id);
-
+        System.out.println(userId);
         List<Posts> posts = postsMapper.findByPostAuthor(Long.valueOf(userId));
         return ResultGenerator.genSuccessResult(posts);
     }
