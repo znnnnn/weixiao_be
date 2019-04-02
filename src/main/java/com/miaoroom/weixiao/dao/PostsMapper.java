@@ -25,5 +25,7 @@ public interface PostsMapper extends Mapper<Posts> {
 //    })
     List<Posts> findByPostAuthor(Long postAuthor);
 
+    Posts findByPostId(Long PostId);
+
     List<Posts> findAll();
 }

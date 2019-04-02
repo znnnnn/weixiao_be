@@ -23,6 +23,7 @@
     <resultMap type="com.miaoroom.weixiao.DTO.PostsListItemDTO" id="PostsListItemDTO" extends="BaseResultMap">
         <association property="usermeta" resultMap="com.miaoroom.weixiao.dao.UsermetaMapper.BaseResultMap" />
         <collection property="upvoteList" ofType="com.miaoroom.weixiao.model.Upvote" resultMap="com.miaoroom.weixiao.dao.UpvoteMapper.BaseResultMap" />
+        <!--嵌套查询评论和评论者的用户信息-->
         <collection property="commentsUsermetaDTOList"  column="post_ID" ofType="com.miaoroom.weixiao.DTO.CommentsUsermetaDTO"  select="com.miaoroom.weixiao.dao.CommentsMapper.findCommentUsermeta" />
     </resultMap>
 
@@ -33,6 +34,14 @@
                                   on posts.post_author = usermeta.user_ID
     WHERE post_author = #{post_author};
   </select>
+
+    <select id="findByPostId"  resultMap="PostsListItemDTO">
+        select * from posts LEFT JOIN upvote
+                                      on posts.post_ID = upvote_post_ID
+                            LEFT JOIN usermeta
+                                      on posts.post_author = usermeta.user_ID
+        WHERE post_ID = #{post_ID};
+    </select>
 
 
   <select id="findAll"  resultMap="PostsListItemDTO">

@@ -40,6 +40,14 @@ public class PostsController {
         return ResultGenerator.genSuccessResult();
     }
 
+    @GetMapping("/{postId}")
+    public Result getPostsByPostId(@PathVariable Integer postId) {
+//        Posts post = postsService.findBy("postId",Long.valueOf(postId));
+        Posts posts = postsMapper.findByPostId(Long.valueOf(postId));
+        return ResultGenerator.genSuccessResult(posts);
+
+    }
+
     @Autowired
     PostsMapper postsMapper;
 

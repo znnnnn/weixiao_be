@@ -10,7 +10,13 @@
     <result column="upvote_user_ID" jdbcType="BIGINT" property="upvoteUserId" />
   </resultMap>
 
+
   <select id="getUpvoteByUserId" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM upvote where upvote_user_ID = #{upvote_user_ID}
   </select>
+
+  <delete id="deleteUpvoteByUserId" >
+    delete from upvote where upvote_post_ID=${postId} and upvote_user_ID = #{userId}
+  </delete>
+
 </mapper>

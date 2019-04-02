@@ -2,10 +2,12 @@ package com.miaoroom.weixiao.web;
 
 import com.miaoroom.weixiao.core.Result;
 import com.miaoroom.weixiao.core.ResultGenerator;
+import com.miaoroom.weixiao.dao.UpvoteMapper;
 import com.miaoroom.weixiao.model.Upvote;
 import com.miaoroom.weixiao.service.UpvoteService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,10 +28,21 @@ public class UpvoteController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
-        upvoteService.deleteById(id);
-        return ResultGenerator.genSuccessResult();
+//    @DeleteMapping("/{id}")
+//    public Result delete(@PathVariable Integer id) {
+//        upvoteService.deleteById(id);
+//        return ResultGenerator.genSuccessResult();
+//    }
+
+    @Autowired
+    private UpvoteMapper upvoteMapper;
+
+    @DeleteMapping
+    public Result deleteByUserId(@RequestParam Long postId, @RequestParam Long userId) {
+//        System.out.println(postId);
+//        System.out.println(userId);
+        Integer isDeleted =  upvoteMapper.deleteUpvoteByUserId(postId,userId);
+        return ResultGenerator.genSuccessResult(isDeleted);
     }
 
     @PutMapping
