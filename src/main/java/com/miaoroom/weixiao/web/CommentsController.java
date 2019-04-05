@@ -1,11 +1,14 @@
 package com.miaoroom.weixiao.web;
 
+import com.miaoroom.weixiao.DTO.CommentsUsermetaDTO;
 import com.miaoroom.weixiao.core.Result;
 import com.miaoroom.weixiao.core.ResultGenerator;
+import com.miaoroom.weixiao.dao.CommentsMapper;
 import com.miaoroom.weixiao.model.Comments;
 import com.miaoroom.weixiao.service.CommentsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +23,9 @@ public class CommentsController {
     @Resource
     private CommentsService commentsService;
 
+    @Autowired
+    private CommentsMapper commentsMapper;
+
     @PostMapping
     public Result add(@RequestBody Comments comments) {
         commentsService.save(comments);
@@ -28,7 +34,7 @@ public class CommentsController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
-        commentsService.deleteById(id);
+        commentsMapper.deleteCommentsByCommentId(Long.valueOf(id));
         return ResultGenerator.genSuccessResult();
     }
 
@@ -41,6 +47,12 @@ public class CommentsController {
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
         Comments comments = commentsService.findById(id);
+        return ResultGenerator.genSuccessResult(comments);
+    }
+
+    @GetMapping("/posts/{commentPostId}")
+    public Result getCommentsListByPostId(@PathVariable Long commentPostId) {
+        List<CommentsUsermetaDTO> comments = commentsMapper.findCommentUsermeta(commentPostId);
         return ResultGenerator.genSuccessResult(comments);
     }
 

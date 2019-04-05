@@ -21,7 +21,16 @@
     </resultMap>
 
     <select id="findCommentUsermeta" resultMap="com.miaoroom.weixiao.dao.CommentsMapper.CommentsUsermetaDTOMap">
-        SELECT * from comments LEFT JOIN usermeta on comments.comment_user_ID = usermeta.user_ID
+        SELECT *
+        from comments
+                 LEFT JOIN usermeta on comments.comment_user_ID = usermeta.user_ID
         where comments.comment_post_ID = #{post_ID}
     </select>
+
+    <delete id="deleteCommentsByCommentId">
+        delete
+        from comments
+        where comment_ID = ${commentId}
+    </delete>
+
 </mapper>
