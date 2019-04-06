@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.miaoroom.weixiao.dao.PostsMapper">
-  <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Posts">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="post_ID" jdbcType="BIGINT" property="postId" />
-    <result column="post_author" jdbcType="BIGINT" property="postAuthor" />
-    <result column="post_author_device" jdbcType="VARCHAR" property="postAuthorDevice" />
-    <result column="post_date" jdbcType="TIMESTAMP" property="postDate" />
-    <result column="post_status" jdbcType="VARCHAR" property="postStatus" />
-    <result column="post_modified" jdbcType="TIMESTAMP" property="postModified" />
-    <result column="post_cat" jdbcType="VARCHAR" property="postCat" />
-    <result column="post_content" jdbcType="LONGVARCHAR" property="postContent" />
-    <result column="post_title" jdbcType="LONGVARCHAR" property="postTitle" />
-    <result column="post_image" jdbcType="LONGVARCHAR" property="postImage" />
+    <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Posts">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="post_ID" jdbcType="BIGINT" property="postId"/>
+        <result column="post_author" jdbcType="BIGINT" property="postAuthor"/>
+        <result column="post_author_device" jdbcType="VARCHAR" property="postAuthorDevice"/>
+        <result column="post_date" jdbcType="TIMESTAMP" property="postDate"/>
+        <result column="post_status" jdbcType="VARCHAR" property="postStatus"/>
+        <result column="post_modified" jdbcType="TIMESTAMP" property="postModified"/>
+        <result column="post_cat" jdbcType="VARCHAR" property="postCat"/>
+        <result column="post_content" jdbcType="LONGVARCHAR" property="postContent"/>
+        <result column="post_title" jdbcType="LONGVARCHAR" property="postTitle"/>
+        <result column="post_image" jdbcType="LONGVARCHAR" property="postImage"/>
 
-    <!--Map里边的名为property的javaType类型引用使用select方法以column作为参数查找-->
+        <!--Map里边的名为property的javaType类型引用使用select方法以column作为参数查找-->
 
-  </resultMap>
-
-    <resultMap type="com.miaoroom.weixiao.DTO.PostsListItemDTO" id="PostsListItemDTO" extends="BaseResultMap">
-        <association property="usermeta" resultMap="com.miaoroom.weixiao.dao.UsermetaMapper.BaseResultMap" />
-        <collection property="upvoteList" ofType="com.miaoroom.weixiao.model.Upvote" resultMap="com.miaoroom.weixiao.dao.UpvoteMapper.BaseResultMap" />
-        <!--嵌套查询评论和评论者的用户信息-->
-        <collection property="commentsUsermetaDTOList"  column="post_ID" ofType="com.miaoroom.weixiao.DTO.CommentsUsermetaDTO"  select="com.miaoroom.weixiao.dao.CommentsMapper.findCommentUsermeta" />
     </resultMap>
 
-  <select id="findByPostAuthor"  resultMap="PostsListItemDTO">
-    select * from posts LEFT JOIN upvote
-                                  on posts.post_ID = upvote_post_ID
-                        LEFT JOIN usermeta
-                                  on posts.post_author = usermeta.user_ID
-    WHERE post_author = #{post_author};
-  </select>
+    <resultMap type="com.miaoroom.weixiao.DTO.PostsListItemDTO" id="PostsListItemDTO" extends="BaseResultMap">
+        <association property="usermeta" resultMap="com.miaoroom.weixiao.dao.UsermetaMapper.BaseResultMap"/>
+        <collection property="upvoteList" ofType="com.miaoroom.weixiao.model.Upvote"
+                    resultMap="com.miaoroom.weixiao.dao.UpvoteMapper.BaseResultMap"/>
+        <!--嵌套查询评论和评论者的用户信息-->
+        <collection property="commentsUsermetaDTOList" column="post_ID"
+                    ofType="com.miaoroom.weixiao.DTO.CommentsUsermetaDTO"
+                    select="com.miaoroom.weixiao.dao.CommentsMapper.findCommentUsermeta"/>
+    </resultMap>
 
-    <select id="findByPostId"  resultMap="PostsListItemDTO">
-        select * from posts LEFT JOIN upvote
-                                      on posts.post_ID = upvote_post_ID
-                            LEFT JOIN usermeta
-                                      on posts.post_author = usermeta.user_ID
-        WHERE post_ID = #{post_ID};
+    <select id="findByPostAuthor" resultMap="PostsListItemDTO">
+        select *
+        from posts
+                 LEFT JOIN upvote
+                           on posts.post_ID = upvote_post_ID
+                 LEFT JOIN usermeta
+                           on posts.post_author = usermeta.user_ID
+        WHERE post_author = #{post_author}
+        order by posts.post_ID desc;
+    </select>
+
+    <select id="findByPostId" resultMap="PostsListItemDTO">
+        select *
+        from posts
+                 LEFT JOIN upvote
+                           on posts.post_ID = upvote_post_ID
+                 LEFT JOIN usermeta
+                           on posts.post_author = usermeta.user_ID
+        WHERE post_ID = #{post_ID}
+        order by posts.post_ID desc;
     </select>
 
 
-  <select id="findAll"  resultMap="PostsListItemDTO">
-    select * from posts LEFT JOIN upvote
-                                  on posts.post_ID = upvote_post_ID
-                        LEFT JOIN comments
-                                  on posts.post_ID = comments.comment_post_ID
-                        LEFT JOIN usermeta
-                                  on posts.post_author = usermeta.user_ID
-  </select>
+    <select id="findAll" resultMap="PostsListItemDTO">
+        select *
+        from posts
+                 LEFT JOIN upvote
+                           on posts.post_ID = upvote_post_ID
+                 LEFT JOIN comments
+                           on posts.post_ID = comments.comment_post_ID
+                 LEFT JOIN usermeta
+                           on posts.post_author = usermeta.user_ID
+        order by posts.post_ID desc
+    </select>
 
 </mapper>

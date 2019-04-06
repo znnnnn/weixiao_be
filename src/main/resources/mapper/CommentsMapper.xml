@@ -25,6 +25,7 @@
         from comments
                  LEFT JOIN usermeta on comments.comment_user_ID = usermeta.user_ID
         where comments.comment_post_ID = #{post_ID}
+        order by comment_ID desc
     </select>
 
     <delete id="deleteCommentsByCommentId">
