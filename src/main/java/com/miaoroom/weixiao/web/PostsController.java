@@ -29,8 +29,8 @@ public class PostsController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
-        postsService.deleteById(id);
+    public Result delete(@PathVariable Long id) {
+        postsMapper.deletePostByPostId(id);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -60,9 +60,17 @@ public class PostsController {
     }
 
     @GetMapping
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam(defaultValue = "dynamic") String type) {
         PageHelper.startPage(page, size);
         List<Posts> list = postsMapper.findAll();
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @GetMapping("/type")
+    public Result getPostsOfType(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam(defaultValue = "dynamic") String type) {
+        PageHelper.startPage(page, size);
+        List<Posts> list = postsMapper.getPostsOfType(type);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

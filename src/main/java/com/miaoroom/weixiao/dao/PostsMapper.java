@@ -27,5 +27,9 @@ public interface PostsMapper extends Mapper<Posts> {
 
     Posts findByPostId(Long PostId);
 
+    List<Posts> getPostsOfType(String type);
+
     List<Posts> findAll();
+
+    Integer deletePostByPostId(@Param("postId") Long postId);
 }

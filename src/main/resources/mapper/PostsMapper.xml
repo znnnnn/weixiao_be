@@ -51,7 +51,23 @@
         WHERE post_ID = #{post_ID}
         order by posts.post_ID desc;
     </select>
-
+    <select id="getPostsOfType" resultMap="PostsListItemDTO">
+        select *
+        from posts
+                 LEFT JOIN upvote
+                           on posts.post_ID = upvote_post_ID
+                 LEFT JOIN comments
+                           on posts.post_ID = comments.comment_post_ID
+                 LEFT JOIN usermeta
+                           on posts.post_author = usermeta.user_ID
+        where post_cat = #{post_cat}
+        order by posts.post_ID desc
+    </select>
+    <delete id="deletePostByPostId">
+        delete
+        from posts
+        where post_ID = ${postId}
+    </delete>
 
     <select id="findAll" resultMap="PostsListItemDTO">
         select *

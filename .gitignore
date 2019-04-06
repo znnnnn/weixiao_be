@@ -21,3 +21,9 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+
+### cache Image
+/*.JPG
+/*.PNG
+/*.HEIC
