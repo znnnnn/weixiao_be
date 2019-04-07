@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miaoroom.weixiao.dao.FollowMapper">
+    <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Follow">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="follow_ID" jdbcType="BIGINT" property="followId"/>
+        <result column="user_ID" jdbcType="BIGINT" property="userId"/>
+        <result column="follow_user_ID" jdbcType="BIGINT" property="followUserId"/>
+        <result column="follow_status" jdbcType="INTEGER" property="followStatus"/>
+        <result column="follow_time" jdbcType="TIMESTAMP" property="followTime"/>
+    </resultMap>
+
+
+    <select id="findFollowByUserId" parameterType="Long" resultMap="BaseResultMap">
+        select *
+        from follow
+        where follow.user_ID = #{userId}
+    </select>
+
+    <select id="findMineFollowByUserId" parameterType="Long" resultMap="BaseResultMap">
+        select *
+        from follow
+        where follow.follow_user_ID = #{userId}
+    </select>
+
+    <delete id="deleteFollowByUserId">
+        delete
+        from follow
+        where follow.user_ID = #{userId}
+          and follow.follow_user_ID = #{followUserId}
+    </delete>
+</mapper>

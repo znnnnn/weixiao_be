@@ -14,8 +14,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2019/03/28.
-*/
+ * Created by CodeGenerator on 2019/03/28.
+ */
 @RestController
 @RequestMapping("/posts")
 public class PostsController {
@@ -54,7 +54,7 @@ public class PostsController {
     @GetMapping("/user/{userId}")
     public Result getPostsByUserId(@PathVariable Integer userId) {
 //        Posts posts = postsService.findById(id);
-        System.out.println(userId);
+//        System.out.println(userId);
         List<Posts> posts = postsMapper.findByPostAuthor(Long.valueOf(userId));
         return ResultGenerator.genSuccessResult(posts);
     }
@@ -71,6 +71,14 @@ public class PostsController {
     public Result getPostsOfType(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam(defaultValue = "dynamic") String type) {
         PageHelper.startPage(page, size);
         List<Posts> list = postsMapper.getPostsOfType(type);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @GetMapping("/type/user")
+    public Result getPostsOfTypeAndPostAuthor(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam(defaultValue = "dynamic") String type, @RequestParam(defaultValue = "dynamic") Long postsAuthor) {
+        PageHelper.startPage(page, size);
+        List<Posts> list = postsMapper.getPostsOfTypeAndPostAuthor(type, postsAuthor);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
