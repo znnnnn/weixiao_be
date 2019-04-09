@@ -25,4 +25,10 @@
           and upvote_user_ID = #{userId}
     </delete>
 
+    <delete id="deleteUpvoteByUpvotePostId">
+        delete
+        from upvote
+        where upvote_post_ID = ${postId}
+    </delete>
+
 </mapper>

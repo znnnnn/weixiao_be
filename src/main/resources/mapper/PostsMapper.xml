@@ -15,6 +15,7 @@
         <result column="post_content" jdbcType="LONGVARCHAR" property="postContent"/>
         <result column="post_title" jdbcType="LONGVARCHAR" property="postTitle"/>
         <result column="post_image" jdbcType="LONGVARCHAR" property="postImage"/>
+        <result column="post_topic_cat" jdbcType="VARCHAR" property="postTopicCat"/>
 
         <!--Map里边的名为property的javaType类型引用使用select方法以column作为参数查找-->
 
@@ -73,7 +74,8 @@
                            on posts.post_ID = comments.comment_post_ID
                  LEFT JOIN usermeta
                            on posts.post_author = usermeta.user_ID
-        where post_cat = #{postsCat} and posts.post_author = #{postsAuthor}
+        where post_cat = #{postsCat}
+          and posts.post_author = #{postsAuthor}
         order by posts.post_ID desc
     </select>
 
@@ -94,5 +96,36 @@
                            on posts.post_author = usermeta.user_ID
         order by posts.post_ID desc
     </select>
+
+    <select id="getTopicList" resultMap="PostsListItemDTO">
+        select *
+        from posts
+                 LEFT JOIN upvote
+                           on posts.post_ID = upvote_post_ID
+                 LEFT JOIN comments
+                           on posts.post_ID = comments.comment_post_ID
+                 LEFT JOIN usermeta
+                           on posts.post_author = usermeta.user_ID
+        where post_cat = "话题"
+          and post_topic_cat = #{postTopicCat}
+        order by posts.post_ID desc
+    </select>
+
+    <!--<select id="getTopicThumb" resultMap="PostsListItemDTO">-->
+        <!--select post_image-->
+        <!--from posts-->
+                 <!--LEFT JOIN upvote-->
+                           <!--on posts.post_ID = upvote_post_ID-->
+                 <!--LEFT JOIN comments-->
+                           <!--on posts.post_ID = comments.comment_post_ID-->
+                 <!--LEFT JOIN usermeta-->
+                           <!--on posts.post_author = usermeta.user_ID-->
+        <!--where post_cat = "话题"-->
+          <!--and post_topic_cat = #{postTopicCat}-->
+          <!--and post_image != "[]"-->
+        <!--order by posts.post_ID desc-->
+        <!--limit 0,1-->
+    <!--</select>-->
+
 
 </mapper>

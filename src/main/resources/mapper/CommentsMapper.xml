@@ -31,7 +31,13 @@
     <delete id="deleteCommentsByCommentId">
         delete
         from comments
-        where comment_ID = ${commentId}
+        where comment_ID = #{commentId}
+    </delete>
+
+    <delete id="deleteCommentsByPostId">
+        delete
+        from comments
+        where comment_post_ID = #{commentPostId}
     </delete>
 
 </mapper>

@@ -13,4 +13,5 @@ public interface CommentsMapper extends Mapper<Comments> {
     List<CommentsUsermetaDTO> CommentsUsermetaDTOMap();
     List<CommentsUsermetaDTO> findCommentUsermeta(Long commentPostId);
     Integer deleteCommentsByCommentId(@Param("commentId") Long commentId);
+    Integer deleteCommentsByPostId(@Param("commentPostId") Long commentPostId);
 }

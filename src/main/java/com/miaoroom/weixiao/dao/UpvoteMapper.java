@@ -17,4 +17,11 @@ public interface UpvoteMapper extends Mapper<Upvote> {
     List<Upvote> getUpvoteByUserId(Long upvoteUserId);
 
     Integer deleteUpvoteByUserId(@Param("postId") Long postId,@Param("userId") Long userId);
+
+    /**
+     * 删除文章时一同删除点赞记录
+     * @param postId
+     * @return
+     */
+    Integer deleteUpvoteByUpvotePostId(@Param("postId") Long postId);
 }

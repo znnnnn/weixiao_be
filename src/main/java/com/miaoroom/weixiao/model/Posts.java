@@ -80,6 +80,14 @@ public class Posts {
     @ApiModelProperty(value="文章内的图片")
     private String postImage;
 
+
+    /**
+     * 话题名称
+     */
+    @Column( name = "post_topic_cat")
+    @ApiModelProperty(value="话题名称")
+    private String postTopicCat;
+
     /**
      * 点赞
      */
@@ -267,5 +275,15 @@ public class Posts {
 
     public void setPostAuthorDevice(String postAuthorDevice) {
         this.postAuthorDevice = postAuthorDevice;
+    }
+
+
+
+    public String getPostTopicCat() {
+        return postTopicCat;
+    }
+
+    public void setPostTopicCat(String postTopicCat) {
+        this.postTopicCat = postTopicCat;
     }
 }

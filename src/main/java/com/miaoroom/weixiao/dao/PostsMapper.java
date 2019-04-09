@@ -34,4 +34,15 @@ public interface PostsMapper extends Mapper<Posts> {
     List<Posts> findAll();
 
     Integer deletePostByPostId(@Param("postId") Long postId);
+
+
+    /**
+     * 获取话题列表
+     * @param topicName
+     * @return
+     */
+    List<Posts> getTopicList(@Param("postTopicCat") String topicName);
+
+
+//    List<Posts> getTopicThumb(@Param("postTopicCat") String topicName);
 }

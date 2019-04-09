@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miaoroom.weixiao.dao.TopicMapper">
+  <resultMap id="BaseResultMap" type="com.miaoroom.weixiao.model.Topic">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="topic_ID" jdbcType="BIGINT" property="topicId" />
+    <result column="topic_name" jdbcType="VARCHAR" property="topicName" />
+    <result column="topic_thumb" jdbcType="VARCHAR" property="topicThumb" />
+    <result column="topic_hot" jdbcType="INTEGER" property="topicHot" />
+  </resultMap>
+
+  <select id="getTopicByTopicName" resultMap="BaseResultMap">
+    select *
+    from topic
+    where topic_name = #{topicName}
+  </select>
+</mapper>
