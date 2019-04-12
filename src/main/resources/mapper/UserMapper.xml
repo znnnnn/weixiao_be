@@ -16,6 +16,10 @@
         <result column="user_permission" jdbcType="VARCHAR" property="userPermission"/>
     </resultMap>
 
+    <resultMap type="com.miaoroom.weixiao.DTO.UserWithUsermetaDTO" id="userWithUsermetaDTO" extends="BaseResultMap">
+        <association property="usermeta" resultMap="com.miaoroom.weixiao.dao.UsermetaMapper.BaseResultMap"/>
+    </resultMap>
+
     <!--<select id="findByUserLogin" parameterType="String" resultMap="BaseResultMap">-->
     <!--SELECT * FROM user-->
     <!--</select>-->
@@ -24,4 +28,20 @@
         FROM user
         where user_login = #{user_login}
     </select>
+
+    <select id="findUserWithUsermetaDTOByUserLogin" resultMap="userWithUsermetaDTO">
+        select *
+        from user
+                 LEFT JOIN usermeta
+                           on user.user_ID = usermeta.user_ID
+        where user.user_login = #{user_login}
+    </select>
+
+    <!--<select id="findUserIdByUserLogin" parameterType="String" resultMap="BaseResultMap">-->
+    <!--SELECT user.user_ID-->
+    <!--FROM user-->
+    <!--where user_login = #{user_login}-->
+    <!--</select>-->
+
+
 </mapper>

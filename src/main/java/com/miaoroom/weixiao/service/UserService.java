@@ -17,4 +17,5 @@ public interface UserService extends Service<User> {
     String loginByCode(String phone);
     ValidateCodeEnum validateCode(String phone, String code);
     void sendSMS(String phone,String action) throws ClientException;
+    Map<String, CodeInfo> getCodeInfoMap();
 }

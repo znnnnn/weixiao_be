@@ -1,6 +1,7 @@
 package com.miaoroom.weixiao.service.impl;
 
 import com.miaoroom.weixiao.DTO.SetUsermeta;
+import com.miaoroom.weixiao.DTO.UserWithUsermetaDTO;
 import com.miaoroom.weixiao.core.ResultGenerator;
 import com.miaoroom.weixiao.dao.UserMapper;
 import com.miaoroom.weixiao.dao.UsermetaMapper;
@@ -60,23 +61,31 @@ public class UsermetaServiceImpl extends AbstractService<Usermeta> implements Us
     }
 
     @Override
-    public Usermeta myHome(String token) {
+    public UserWithUsermetaDTO myHome(String token) {
 //        System.out.println(JWTUtil.getUsername(token));
         String userLogin = JWTUtil.getUsername(token);
-        Long userId = userMapper.findByUserLogin(userLogin).getUserId();
-//        Usermeta usermeta = new Usermeta();
-//        usermeta.setUserId(userId);
-        Usermeta result = usermetaService.findBy("userId", userId);
+//        System.out.println(userLogin);
+//        Long userId = userService.findBy("userLogin",userLogin).getUserId();
+        if (userLogin == null) {
+            System.out.println(userLogin);
+            return null;
+        }
+        UserWithUsermetaDTO result = userMapper.findUserWithUsermetaDTOByUserLogin(userLogin);
+//        System.out.println(userWithUsermetaDTO);
+//        return null;
+//        Usermeta result = usermetaService.findBy("userId", userId);
 //        查询是否存在用户信息，如果不存在则新建默认一条
         if (result == null) {
             Usermeta defaultUsermeta = new Usermeta();
-            defaultUsermeta.setUserId(userId);
+            defaultUsermeta.setUserId(result.getUserId());
             defaultUsermeta.setNickname(userLogin);
-            defaultUsermeta.setAvatar("http://111.67.196.209/wp-content/uploads/2019/03/avatar"+(int)(Math.random()*17+1)+".png");
+            defaultUsermeta.setAvatar("http://111.67.196.209/wp-content/uploads/2019/03/avatar" + (int) (Math.random() * 17 + 1) + ".png");
             defaultUsermeta.setJob("在校学生");
             defaultUsermeta.setSchool("斯坦福大学");
             usermetaService.save(defaultUsermeta);
-            return defaultUsermeta;
+            UserWithUsermetaDTO userWithUsermetaDTO = new UserWithUsermetaDTO();
+            userWithUsermetaDTO.setUsermeta(defaultUsermeta);
+            return userWithUsermetaDTO;
         }
         return result;
     }

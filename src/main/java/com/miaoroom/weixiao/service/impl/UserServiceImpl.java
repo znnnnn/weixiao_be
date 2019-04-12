@@ -92,10 +92,16 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Autowired
     SMSUtil smsUtil;
+
     /**
      * 该手机号的验证码和发送时间，用到了一个Map保存。
      */
     private final static Map<String, CodeInfo> codeInfoMap = new HashMap<String, CodeInfo>();
+
+    @Override
+    public Map<String, CodeInfo> getCodeInfoMap() {
+        return codeInfoMap;
+    }
 
     /**
      * 发送短信

@@ -16,13 +16,13 @@ import java.util.Date;
 public class CodeInfo {
     private String phone;
     private String code;
-    private String action;
+//    private String action;
     private Date date;
 
     public CodeInfo(String phone, String code, String action, Date date) {
         this.phone = phone;
         this.code = code;
-        this.action = action;
+//        this.action = action;
         this.date = date;
     }
 

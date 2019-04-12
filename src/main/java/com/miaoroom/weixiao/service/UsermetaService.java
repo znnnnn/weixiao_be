@@ -1,5 +1,6 @@
 package com.miaoroom.weixiao.service;
 import com.miaoroom.weixiao.DTO.SetUsermeta;
+import com.miaoroom.weixiao.DTO.UserWithUsermetaDTO;
 import com.miaoroom.weixiao.model.Usermeta;
 import com.miaoroom.weixiao.core.Service;
 
@@ -9,6 +10,6 @@ import com.miaoroom.weixiao.core.Service;
  */
 public interface UsermetaService extends Service<Usermeta> {
     boolean setUsermeta(SetUsermeta usermeta);
-    Usermeta myHome(String token);
+    UserWithUsermetaDTO myHome(String token);
     Usermeta userHome(String userId);
 }

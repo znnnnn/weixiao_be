@@ -60,7 +60,7 @@ public class UsermetaController {
 
     @PutMapping
     public Result update(@RequestBody Usermeta usermeta) {
-        System.out.println(usermeta.getNickname());
+//        System.out.println(usermeta.getNickname());
 //        Long umetaId = usermetaService.findBy("userId", usermeta.getUserId()).getUmetaId();
 //
         usermetaService.update(usermeta);
@@ -78,8 +78,8 @@ public class UsermetaController {
     public Result getUsermetaByUserId(@PathVariable Integer userId){
 //        System.out.println(id);
         Usermeta usermeta = usermetaService.findBy("userId", Long.valueOf(userId));
-        System.out.println("获取了用户ID:"+ String.valueOf(userId) + "的用户信息");
-        System.out.println(usermeta);
+//        System.out.println("获取了用户ID:"+ String.valueOf(userId) + "的用户信息");
+//        System.out.println(usermeta);
         return ResultGenerator.genSuccessResult(usermeta);
     }
 
@@ -100,7 +100,7 @@ public class UsermetaController {
     @GetMapping("/myhome")
     public Result myHome(@RequestParam String token) {
 //        usermetaService.setUsermeta(usermeta);
-        Usermeta usermeta = usermetaService.myHome(token);
+        Usermeta usermeta = usermetaService.myHome(token).getUsermeta();
 //        System.out.println(usermeta.getNickname());
         return ResultGenerator.genSuccessResult(usermeta);
     }

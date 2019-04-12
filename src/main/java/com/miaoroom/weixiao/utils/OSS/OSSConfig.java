@@ -16,7 +16,7 @@ public class OSSConfig {
     private int month = cal.get(Calendar.MONTH )+1;
     private int day = cal.get(Calendar.DAY_OF_MONTH);
     private String bucketUrl = "https://oss-miaoroom.oss-cn-shanghai.aliyuncs.com";        //原图片服务器地址
-    private String baseUrl = "https://oss.miaoroom.com";        //自定义解析后的图片服务器地址
+    private String baseUrl = "https://weixiao.miaoroom.com";        //自定义解析后的图片服务器地址
     private String endpoint = "https://oss-cn-shanghai.aliyuncs.com";        //连接区域地址
     private String accessKeyId = "LTAICq734h6sfksn";    //连接keyId
     private String accessKeySecret = "U6zDeG1DcTb4I13JXbNOBGuA8ItUuv";    //连接秘钥
