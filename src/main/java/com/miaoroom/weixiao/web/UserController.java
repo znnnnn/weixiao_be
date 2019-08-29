@@ -136,7 +136,7 @@ public class UserController {
 
     @ApiOperation(value = "查看验证码", notes = "查看验证码信息")
     @GetMapping("/code")
-    @ResponseBody
+//    @ResponseBody
     public Map<String, CodeInfo> getCodeInfoMap() {
         return userService.getCodeInfoMap();
     }
